@@ -1,0 +1,112 @@
+<div class="container h-100">
+  <br>
+
+  <div class="row h-100 justify-content-center align-items-center justify-content-center">
+    <aside class="col-sm-4">
+      <p>Welcome </p>
+      <div class="card">
+        <article class="card-body">
+          <a class="float-right btn btn-outline-primary">Create talk /topic</a>
+          <h4 class="card-title mb-4 mt-1">We care about you </h4>
+          <a [routerLink]="" class="btn btn-block btn-outline-primary"> <i class=""></i>Check out list of
+            topic/talks</a>
+          <p *ngIf="errorMessage" style="color: dodgerblue">{{errorMessage}}</p>
+          <p *ngIf="successMessage" style="color: dodgerblue">{{successMessage}}</p>
+
+          <form #newTalkForm (ngSubmit)="createTalk(newTalkForm)">
+            <div class="form-group">
+              <label>title</label>
+              <input class="form-control" name="title" placeholder="please enter title " type="text"
+                     [(ngModel)]="newTalk.title" required>
+            </div>
+            <div class="form-group">
+              <label>Content</label>
+              <input class="form-control" name="content" placeholder="please enter content" type="text"
+                     [(ngModel)]="newTalk.content" required>
+            </div>
+
+            <div class="form-group">
+              <label>Speaker</label>
+              <input class="form-control" placeholder="speaker" name="speaker" [(ngModel)]="newTalk.speaker"
+                     type="text" required>
+            </div>
+
+
+            <div class="form-group">
+              <button *ngIf="loading" type="submit" class="btn btn-primary btn-block"> please wait</button>
+              <button *ngIf="!loading" type="submit" class="btn btn-primary btn-block"> Create</button>
+            </div>
+          </form>
+        </article>
+      </div>
+
+    </aside>
+    <aside class="col-sm-4">
+      <p>Inter in</p>
+
+      <div class="card">
+        <article class="card-body">
+          <a class="float-right btn btn-outline-primary">please register</a>
+          <h4 class="card-title mb-4 mt-1">You want to attend ?</h4>
+          <p>
+            <a [routerLink]="'/attendeeList'" class="btn btn-block btn-outline-primary"> <i class=""></i>Check out list
+              of
+              attendee/talks</a>
+          </p>
+          <hr>
+          <p *ngIf="errorMessage" style="color: dodgerblue">{{errorMessage}}</p>
+          <p *ngIf="successMessage" style="color: dodgerblue">{{successMessage}}</p>
+
+          <form #attendee (ngSubmit)="createAttendee(attendee)">
+            <div class="form-group">
+              <label>Your name</label>
+              <input name="attendee_name" class="form-control" placeholder="please input your name"
+                     [(ngModel)]="newAttendee.attendee_name" type="text">
+            </div>
+            <div class="form-group">
+              <label>Gender</label>
+              <select name="gender" class="form-control" [(ngModel)]="newAttendee.gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Location</label>
+              <input class="form-control" placeholder="your location " name="present_location"
+                     [(ngModel)]="newAttendee.present_location" type="text">
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Select Talk</label>
+              <div class="col-sm-10">
+                <select name="select" class="form-control" (change)="selectTalk($event.target.value)">
+                  <option *ngFor="let talk of talks" [value]="talk._id">{{talk.title}}</option>
+                </select>
+              </div>
+            </div>
+            <br>
+            <P></P>
+
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <button *ngIf="loadingAttendee" type="submit" class="btn btn-primary btn-block"> please wait</button>
+                  <button type="submit" class="btn btn-primary btn-block"> Create</button>
+                </div>
+              </div>
+              <div class="col-md-6 text-right">
+              </div>
+            </div>
+          </form>
+        </article>
+      </div>
+
+    </aside>
+  </div>
+
+</div>
+
+
+
